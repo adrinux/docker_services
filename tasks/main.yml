@@ -1,0 +1,13 @@
+---
+
+- name: 'Create Docker data directory'
+  file:
+    path: "{{ docker_data_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: "Deploy services"
+  include_tasks: "{{ containers }}.yml"
+  loop: "{{ mandatory_services + enabled_services }}"
+  loop_control:
+    loop_var: 'containers'
