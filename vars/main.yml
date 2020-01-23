@@ -1,5 +1,6 @@
 ---
 
+# These variables are not intended to be user configurable
 mandatory_services:
   - 'traefik'
   - 'portainer'

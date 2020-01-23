@@ -1,5 +1,10 @@
 ---
 
+# These variables are intended to be user configurable
+# and should be overridden via Ansible
+#
+
+
 enabled_services:
   #- 'janitor'
   #- 'gitea'
