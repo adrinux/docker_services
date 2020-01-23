@@ -4,3 +4,47 @@ enabled_services:
   #- 'janitor'
   #- 'gitea'
   #- 'drone'
+
+
+docker_data_dir: '/data/docker/volumes'         # Where to store the volumes on the docker hosts
+
+restart_policy: 'unless-stopped'
+
+traefik_domain: 'trfk.example.com'              # Subdomain to put all services under
+
+#portainer_app_name: 'portainer'                 # Service name for Portainer (portainer.dckr.example.com)
+
+#registry_app_name: 'registry.example.com'
+#registry_selfsign: true                          # Selfsign the used SSL certificate
+#registry_username: 'docker'
+#registry_password: 'ImagesForTheMasses'
+
+#db_root_password: 'StoreAllTheData!'            # Database root password for all services
+#db_backup_interval: '86400'                     # Interval in seconds when to run DB backups
+
+#gitea_app_name: 'gitea'
+#gitea_db_password: 'GitRocksYourSocksOff'
+
+#drone_app_name: 'drone'
+#drone_db_password: 'NotSoSecretPassword'
+#drone_runner_cap: 2                                         # Amount of jobs that can simultaneously run
+#drone_agent_rpc_secret: 'AllYourCompileJobsAreBelongToUs'   # RPC secret to connect Drone agents
+
+#awx_app_name: 'not-tower'
+#awx_db_password: 'AutomateAllTheThings!'
+#awx_secret_key: 'FasterThenLight'
+
+#docker_janitor_delay: 3600                                # Interval for Janitor to run 'docker prune system -f'
+
+#mediawiki_db_password: 'KnowledgeIsPower'
+#mediawiki_app_name: 'wiki'
+#mediawiki_image: 'mediawiki'
+
+#kanboard_db_password: 'DoAllTheThings'
+#kanboard_app_name: 'kanboard'
+
+#minecraft_server_type: 'VANILLA'
+
+#factorio_server_release: 'stable'
+
+#rocketchat_app_name: 'rocketchat'
