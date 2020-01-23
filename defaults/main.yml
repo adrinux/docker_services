@@ -17,7 +17,7 @@ restart_policy: 'unless-stopped'
 
 traefik_domain: 'trfk.example.com'              # Subdomain to put all services under
 
-#portainer_app_name: 'portainer'                 # Service name for Portainer (portainer.dckr.example.com)
+portainer_app_name: 'portainer'                 # Service name for Portainer (portainer.traefik-domain.com)
 
 #registry_app_name: 'registry.example.com'
 #registry_selfsign: true                          # Selfsign the used SSL certificate
