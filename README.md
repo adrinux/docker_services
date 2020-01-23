@@ -6,10 +6,10 @@ My personal ansible role for deploying selfhosted services via docker. It may be
 Requirements
 ------------
 
-I use this role to install docker.
-geerlingguy.docker
+I use this role to install docker:
+geerlingguy.docker https://github.com/geerlingguy/ansible-role-docker
 
-[Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.]
+
 
 Role Variables
 --------------
@@ -30,9 +30,11 @@ Example Playbook
 License
 -------
 
-MIT
+GPLv3
 
 Author Information
 ------------------
 
 Adrian Simmons (adrinux)
+
+This role takes heavy 'inspiration' from [ansible-role-docker-services](https://github.com/Thulium-Drake/ansible-role-docker_services) - whilst not being a direct fork some code was used as a base.
