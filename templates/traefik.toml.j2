@@ -20,6 +20,12 @@
     useBindPortIp = true
     watch = true
 
+  [providers.file]
+    filename = "dynamic_conf.toml"
+    watch = true
+
 [[tls.certificates]]
   certFile = "{{ docker_data_dir }}/certbot/cert.pem"
   keyFile = "{{ docker_data_dir }}/certbot/key.pem"
+
+

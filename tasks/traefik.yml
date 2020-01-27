@@ -19,6 +19,12 @@
     dest: '{{ docker_data_dir }}/traefik_data/traefik.toml'
     mode: '0644'
 
+- name: 'Copy traefik dynamic configuration into place'
+  template:
+    src: 'templates/traefik_dynamic_conf.toml.j2'
+    dest: '{{ docker_data_dir }}/traefik_data/dynamic_conf.toml'
+    mode: '0644'
+
 - name: 'Deploy Traefik'
   docker_container:
     name: 'traefik'
@@ -27,10 +33,7 @@
       traefik.enable: 'true'
       traefik.http.routers.traefik.entrypoints: 'http'
       traefik.http.routers.traefik.rule: "Host(`{{ traefik_domain }}`)"
-      traefik.http.middlewares.traefik-auth.basicauth.users: "{{ traefik_auth_credentials }}"
-      traefik.http.middlewares.https-redirect.redirectscheme.scheme: 'https'
-      traefik.http.middlewares.redirect-https.redirectscheme.permanent: 'true'
-      traefik.http.routers.traefik.middlewares: 'https-redirect'
+      traefik.http.routers.traefik.middlewares: 'redirect@file'
       traefik.http.routers.traefik-secure.entrypoints: 'https'
       traefik.http.routers.traefik-secure.rule: "Host(`{{ traefik_domain }}`)"
       traefik.http.routers.traefik-secure.middlewares: 'traefik-auth'
@@ -42,6 +45,9 @@
         target: '/traefik.toml'
         type: 'bind'
         readonly: yes
+      - source: '{{ docker_data_dir }}/traefik_data/dynamic_conf.toml'
+        target: '/traefik.toml'
+        type: 'bind'
       - source: '{{ docker_data_dir }}/certbot/cert.pem'
         target: '/cert.pem'
         type: 'bind'

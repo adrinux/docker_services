@@ -1,0 +1,8 @@
+
+[http]
+  [http.middlewares]
+      [http.middlewares.redirect.redirectscheme]
+	      scheme = "https"
+	      permanent = true
+      [http.middlewares.traefik-auth.basicauth]
+        users = "{{ traefik_auth_credentials }}"
