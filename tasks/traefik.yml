@@ -1,8 +1,8 @@
 ---
+
 - name: 'Add traefik_backend network'
   docker_network:
     name: 'traefik_backend'
-    driver: 'overlay'
 
 - name: 'Create directory for data'
   file:
@@ -28,7 +28,7 @@
 - name: 'Deploy Traefik'
   docker_container:
     name: 'traefik'
-    image: 'traefik:v2.1'
+    image: traefik:v2.1
     labels:
       traefik.enable: 'true'
       traefik.http.routers.traefik.entrypoints: 'http'
@@ -44,24 +44,26 @@
       - source: '{{ docker_data_dir }}/traefik_data/traefik.toml'
         target: '/traefik.toml'
         type: 'bind'
-        readonly: yes
+        read_only: 'yes'
       - source: '{{ docker_data_dir }}/traefik_data/dynamic_conf.toml'
-        target: '/traefik.toml'
+        target: '/dynamic_conf.toml'
         type: 'bind'
       - source: '{{ docker_data_dir }}/certbot/cert.pem'
         target: '/cert.pem'
         type: 'bind'
-        readonly: yes
+        read_only: 'yes'
       - source: '{{ docker_data_dir }}/certbot/key.pem'
         target: '/key.pem'
         type: 'bind'
-        readonly: yes
+        read_only: 'yes'
     networks:
-      - 'traefik_backend'
+      - name: 'traefik_backend'
+    networks_cli_compatible: yes
     published_ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
     recreate: true
     restart_policy: "{{ restart_policy }}"
-    user: null
+    state: present
+    user: 'null'

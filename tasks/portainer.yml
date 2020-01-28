@@ -8,21 +8,23 @@
 - name: 'Deploy Portainer'
   docker_container:
     name: 'portainer'
-    image: 'portainer/portainer'
+    image: portainer/portainer
     command: '-H unix:///var/run/docker.sock'
     labels:
       traefik.enable: 'true'
       traefik.http.routers.portainer.rule: "Host(`{{ portainer_app_name }}.{{ traefik_domain }}`)"
-      traefik.http.routers.portainer.tls: "true"
+      traefik.http.routers.portainer.tls: 'true'
       traefik.http.services.portainer.loadbalancer.server.port: '9000'
     mounts:
       - source: "{{ docker_data_dir }}/portainer_data"
         target: '/data'
         type: 'bind'
     networks:
-      - 'traefik_backend'
+      - name: 'traefik_backend'
+    networks_cli_compatible: yes
     published_ports:
       - "10001:9000"
     recreate: true
     restart_policy: "{{ restart_policy }}"
+    state: present
     user: null
