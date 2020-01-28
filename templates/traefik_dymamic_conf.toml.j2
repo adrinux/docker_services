@@ -6,3 +6,8 @@
 	      permanent = true
       [http.middlewares.traefik-auth.basicauth]
         users = "{{ traefik_auth_credentials }}"
+
+[tls]
+  [[tls.certificates]]
+    certFile = "{{ docker_data_dir }}/certbot/cert.pem"
+    keyFile = "{{ docker_data_dir }}/certbot/key.pem"
